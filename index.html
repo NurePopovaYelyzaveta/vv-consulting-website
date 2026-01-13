@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="de" x-data="app()" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viktoriia Vasylieva IT Consulting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <script src="translations.js"></script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('app', () => ({
+                lang: 'de',
+                t(path) {
+                    return path.split('.').reduce((o, i) => o?.[i], translations[this.lang]);
+                }
+            }));
+        });
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="font-sans text-slate-200 bg-slate-950 antialiased">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span
+                class="font-bold text-xl bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+                VV IT Consulting
+            </span>
+
+            <nav class="hidden md:flex gap-6 text-sm font-medium">
+                <a x-text="t('nav.home')" href="#home"></a>
+                <a x-text="t('nav.benefits')" href="#benefits"></a>
+                <a x-text="t('nav.services')" href="#services"></a>
+                <a x-text="t('nav.projects')" href="#projects"></a>
+                <a x-text="t('nav.cta_2026')" href="#cta-2026"></a>
+                <a x-text="t('nav.contact')" href="#contact"></a>
+            </nav>
+
+            <div class="text-sm">
+                <button @click="lang='de'" :class="lang==='de' ? 'font-semibold text-indigo-600' : ''">DE</button> |
+                <button @click="lang='en'" :class="lang==='en' ? 'font-semibold text-indigo-600' : ''">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24">
+
+        <!-- HOME -->
+        <section id="home"
+            class="relative overflow-hidden py-32 bg-gradient-to-br from-indigo-950 via-slate-950 to-violet-950">
+            <div class="glow w-96 h-96 bg-indigo-600 top-0 left-0"></div>
+            <div class="glow w-96 h-96 bg-violet-600 bottom-0 right-0"></div>
+
+            <div class="relative max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
+                <div class="flex justify-center">
+                    <img src="assets/images/viktoriia.png" alt="Viktoriia Vasylieva"
+                        class="w-72 rounded-3xl shadow-2xl ring-1 ring-white/10 animate-fadeIn">
+                </div>
+
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-semibold leading-tight mb-6" x-text="t('hero.title')"></h1>
+                    <p class="text-lg text-slate-300 mb-4" x-text="t('hero.p1')"></p>
+                    <p class="text-slate-400 mb-8" x-text="t('hero.p2')"></p>
+
+                    <a href="#contact"
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:opacity-90 text-white px-8 py-3 rounded-xl shadow-lg transition"
+                        x-text="t('hero.btn')">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFITS -->
+        <section id="benefits" class="py-28 bg-indigo-950">
+            <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="section-title text-indigo-400" x-text="t('benefits.title')"></h2>
+                    <p class="section-text text-slate-300 mt-6"></p>
+                    <ul class="mt-8 space-y-3">
+                        <template x-for="item in t('benefits.items')" :key="item">
+                            <li class="border-l-2 border-indigo-500 pl-4" x-text="item"></li>
+                        </template>
+                    </ul>
+                </div>
+
+                <div class="glass rounded-3xl h-96 flex items-center justify-center">
+
+                    <img src="assets/images/benefits.jpg" alt="Abstract / Business / Technology"
+                        class="w-full h-full object-cover rounded-3xl" />
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="relative py-28 bg-slate-950 overflow-hidden">
+            <!-- divider -->
+            <div
+                class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent">
+            </div>
+            <!-- arrow line -->
+            <svg class="absolute right-[-60px] top-32 opacity-25" width="420" height="260" viewBox="0 0 420 260"
+                fill="none">
+                <defs>
+                    <linearGradient id="arrowGrad" x1="0" y1="0" x2="420" y2="0">
+                        <stop stop-color="#818cf8" />
+                        <stop offset="1" stop-color="#a78bfa" />
+                    </linearGradient>
+                </defs>
+                <path d="M20 130 H340" stroke="url(#arrowGrad)" stroke-width="2" stroke-linecap="round" />
+                <path d="M300 110 L340 130 L300 150" stroke="url(#arrowGrad)" stroke-width="2" fill="none" />
+                <path d="M260 110 L300 130 L260 150" stroke="url(#arrowGrad)" stroke-width="2" fill="none" />
+                <path d="M220 110 L260 130 L220 150" stroke="url(#arrowGrad)" stroke-width="2" fill="none" />
+            </svg>
+
+            <!-- TITLE -->
+            <h2 class="section-title text-center bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent"
+                x-text="t('services.title')">
+            </h2>
+
+            <p class="section-text mt-4 text-center text-slate-300 max-w-3xl mx-auto" x-text="t('services.subtitle')">
+            </p>
+
+            <!-- CARDS -->
+            <div class="grid md:grid-cols-3 gap-10 mt-16">
+                <div class="card relative">
+                    <div class="h-32 rounded-xl mb-6 overflow-hidden">
+                        <img src="assets/images/strategy.png" alt="IT Strategy Visual"
+                            class="w-full h-full object-cover" />
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-4" x-text="t('services.it.title')">
+                    </h3>
+
+                    <p class="text-slate-300 mb-4" x-text="t('services.it.desc')"></p>
+                    </p>
+
+                    <ul class="list-disc list-inside space-y-2 text-slate-400 mb-4">
+                        <template x-for="item in t('services.it.points')" :key="item">
+                            <li x-text="item"></li>
+                        </template>
+                    </ul>
+                </div>
+
+                <div class="card relative">
+                    <div class="h-32 rounded-xl mb-6 overflow-hidden">
+                        <img src="assets/images/business.jpg" alt="IT Business Visual"
+                            class="w-full h-full object-cover" />
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-4" x-text="t('services.business.title')">
+                    </h3>
+
+                    <p class="text-slate-300 mb-4" x-text="t('services.business.desc')"></p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-400 mb-4">
+                        <template x-for="item in t('services.business.points')" :key="item">
+                            <li x-text="item"></li>
+                        </template>
+                    </ul>
+                </div>
+
+                <div class="card relative">
+                    <div class="h-32 rounded-xl mb-6 overflow-hidden">
+                        <img src="assets/images/digital.jpg" alt="IT Digital Visual"
+                            class="w-full h-full object-cover" />
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-indigo-300 mb-4" x-text="t('services.digital.title')">
+                    </h3>
+
+                    <p class="text-slate-300 mb-4" x-text="t('services.digital.desc')"></p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-400 mb-4">
+                        <template x-for="item in t('services.digital.points')" :key="item">
+                            <li x-text="item"></li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects"
+            class="relative py-28 bg-gradient-to-br from-slate-900 via-indigo-950 to-violet-900 overflow-hidden">
+            <!-- blobs in background -->
+            <div class="absolute -top-32 -right-32 w-96 h-96 bg-indigo-800 rounded-full blur-3xl opacity-30"></div>
+            <div class="absolute -bottom-32 -left-24 w-80 h-80 bg-violet-800 rounded-full blur-3xl opacity-25"></div>
+
+            <div class="relative max-w-6xl mx-auto px-6">
+                <!-- Section Title -->
+                <h2 class="section-title text-center bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent mb-12"
+                    x-text="t('projects.title')">
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-10">
+                    <div class="card bg-slate-800 rounded-3xl shadow-xl p-6 border border-indigo-700">
+
+                        <h3 class="text-xl font-semibold text-indigo-300 mb-4"
+                            x-text="t('projects.digital_ecosystem.title')">
+                        </h3>
+
+                        <p class="text-slate-300 mb-3" x-text="t('projects.digital_ecosystem.p1')">
+                        </p>
+
+                        <p class="text-slate-300 mb-4" x-text="t('projects.digital_ecosystem.p2')">
+                        </p>
+
+                        <div class="mt-4 p-4 rounded-xl bg-indigo-900 border-l-4 border-indigo-400">
+                            <p class="text-slate-300 font-semibold" x-text="t('projects.digital_ecosystem.result')">
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-slate-800 rounded-3xl shadow-xl p-6 border border-indigo-700">
+
+                        <h3 class="text-xl font-semibold text-indigo-300 mb-4"
+                            x-text="t('projects.secure_infrastructure.title')">
+                        </h3>
+
+                        <p class="text-slate-300 mb-3" x-text="t('projects.secure_infrastructure.p1')">
+                        </p>
+
+                        <p class="text-slate-300 mb-4" x-text="t('projects.secure_infrastructure.p2')">
+                        </p>
+
+                        <div class="mt-4 p-4 rounded-xl bg-indigo-900 border-l-4 border-indigo-400">
+                            <p class="text-slate-300 font-semibold" x-text="t('projects.secure_infrastructure.result')">
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-slate-800 rounded-3xl shadow-xl p-6 border border-indigo-700">
+
+                        <h3 class="text-xl font-semibold text-indigo-300 mb-4"
+                            x-text="t('projects.process_automation.title')">
+                        </h3>
+
+                        <p class="text-slate-300 mb-3" x-text="t('projects.process_automation.p1')">
+                        </p>
+
+                        <p class="text-slate-300 mb-4" x-text="t('projects.process_automation.p2')">
+                        </p>
+
+                        <div class="mt-4 p-4 rounded-xl bg-indigo-900 border-l-4 border-indigo-400">
+                            <p class="text-slate-300 font-semibold" x-text="t('projects.process_automation.result')">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="cta-2026"
+            class="relative py-28 bg-gradient-to-br from-indigo-900 via-indigo-950 to-violet-900 overflow-hidden text-slate-200">
+            <!-- abstract diagonal line -->
+            <svg class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 1440 320"
+                fill="none">
+                <path fill="url(#gradLine)"
+                    d="M0,160L60,149.3C120,139,240,117,360,112C480,107,600,117,720,138.7C840,160,960,192,1080,197.3C1200,203,1320,181,1380,170.7L1440,160L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z" />
+                <defs>
+                    <linearGradient id="gradLine" x1="0" y1="0" x2="1440" y2="0">
+                        <stop stop-color="#6366f1" />
+                        <stop offset="1" stop-color="#8b5cf6" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <div class="relative max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent"
+                    x-text="t('cta.title')">
+                </h2>
+
+                <p class="text-lg md:text-xl mb-6 text-slate-300 max-w-3xl mx-auto" x-text="t('cta.p1')">
+                </p>
+
+                <h3 class="text-2xl md:text-3xl font-medium mb-4 text-indigo-400" x-text="t('cta.subtitle')">
+                </h3>
+
+                <p class="text-slate-300 max-w-2xl mx-auto" x-text="t('cta.p2')">
+                </p>
+            </div>
+        </section>
+
+        <section id="contact"
+            class="relative py-28 bg-gradient-to-br from-slate-900 via-indigo-950 to-violet-900 overflow-hidden text-slate-200">
+            <!-- subtle abstract blobs -->
+            <div class="absolute -top-24 -left-24 w-80 h-80 bg-indigo-800 rounded-full blur-3xl opacity-30"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-violet-800 rounded-full blur-3xl opacity-25"></div>
+
+            <div class="relative max-w-lg mx-auto px-6">
+                <h2 class="section-title text-center text-indigo-300" x-text="t('contact.title')"></h2>
+                <form action="https://formspree.io/f/mdaaolvw" method="POST" class="space-y-5 mt-10">
+                    <input name="name" required :placeholder="t('contact.name')"
+                        class="input bg-slate-800 border-indigo-700 text-slate-200 placeholder-slate-400 w-full">
+
+                    <input type="email" name="email" required :placeholder="t('contact.email')"
+                        class="input bg-slate-800 border-indigo-700 text-slate-200 placeholder-slate-400 w-full">
+
+                    <textarea name="message" required :placeholder="t('contact.message')"
+                        class="input bg-slate-800 border-indigo-700 text-slate-200 placeholder-slate-400 w-full"></textarea>
+
+                    <button type="submit"
+                        class="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-xl shadow-lg transition">
+                        <span x-text="t('contact.btn')"></span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+    <footer id="impressum" class="bg-slate-900 py-8 text-center text-slate-400 text-sm">
+        © 2026 Viktoriia Vasylieva IT Consulting
+        <div class="mt-3 space-y-1 flex flex-col items-center">
+            <p>Leipzig</p>
+            <!-- Phone -->
+            <a href="tel:+4915125380183" class="flex items-center gap-2 transition-colors hover:text-white">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M2 3.6C2 2.7 2.7 2 3.6 2h3.2c.8 0 1.5.5 1.7 1.3l.8 3.2c.2.7-.1 1.4-.7 1.8l-1.9 1.2a16 16 0 007 7l1.2-1.9c.4-.6 1.1-.9 1.8-.7l3.2.8c.8.2 1.3.9 1.3 1.7v3.2c0 .9-.7 1.6-1.6 1.6C9.4 22 2 14.6 2 5.6z" />
+                </svg>
+                +49 151 2538 0183
+            </a>
+            <!-- Email -->
+            <a href="mailto:vv8499617@gmail.com" class="flex items-center gap-2 transition-colors hover:text-white">
+                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+                vv8499617@gmail.com
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>
